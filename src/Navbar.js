@@ -8,7 +8,7 @@ export default function Navbar({auth,user}) {
         .then((u)=>{
             console.log("log in")
         })
-        .catch((e)=>{console.log("error!: "+e.message)})
+        .catch((e)=>{alert(e.message)})
     }
 
     function logOut(){
@@ -16,7 +16,7 @@ export default function Navbar({auth,user}) {
         .then(
             console.log("log out")
         )
-        .catch((e)=>{console.log("error!: "+e.message)})
+        .catch((e)=>{alert(e.message)})
     }
 
     return (

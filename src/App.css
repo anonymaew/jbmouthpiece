@@ -1,18 +1,30 @@
 *{
   font-family: 'Kanit', sans-serif;
+  color:white;
 }
 
 body{
-  background-color:#222
+  background-color:#222;
+  padding:0px;
+}
+
+p{
+  margin:4px;
+}
+
+#catalog{
+  display:flex;
+  flex-wrap: wrap;
 }
 
 .productCard{
-  width: 240px;
+  width:27%;
+  flex-shrink: 0;
   background-color:#444;
   transition:0.3s;
   border-radius: 8px;
-  box-shadow: 0 4px 8px 0px rgba(0,0,0,0.5);
-  margin: 16px;
+  box-shadow: 0 4px 8px 0px rgba(0,0,0,0.75);
+  margin: 2%;
   padding: 8px;
 }
 
@@ -22,8 +34,10 @@ body{
 }
 
 .productName{
-  margin:8px;
-  color:#fff;
+  margin:6px;
+  font-size:x-large;
+  font-weight: bold;
+  color:#c0a860;
 }
 
 .productPrice{
@@ -31,17 +45,91 @@ body{
   color:#ddd;
 }
 .productSale{
-  margin:8px;
+  margin:6px;
   color:#88ff88;
 }
 .productOos{
-  margin:8px;
+  margin:6px;
   color:#ff8888;
 }
 
+input,button,select{
+  border-radius: 8px;
+  border-style: solid;
+  border-color:#c0a860;
+  background-color:#444
+}
+
 .tag{
-  margin:4px;
+  display:inline-block;
+  font-size:small;
+  margin:2px;
   padding-inline:8px;
   border-radius: 8px;
-  color:#fff;
+}
+
+.tag:hover .description {
+  display:block;
+}
+
+.description {
+  display: none;
+  background-color: rgba(0, 0, 0, 0.75);
+  padding:4px 8px;
+  border-radius: 4px;
+  font-size:small;
+
+  margin-left: -8px;
+  margin-top: 4px;
+  position: absolute;
+  z-index: 1000;
+}
+
+#sortsieve{
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  background-color: #222;
+  box-shadow: 0 4px 8px 0px rgba(0,0,0,0.75);
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-left:16px;
+}
+
+.close{
+  text-decoration:none;
+  margin-left:16px;
+}
+
+#sortsieve .close {
+  font-size: 24px;
+  margin-left: 160px;
+}
+
+@media screen and (max-width:840px){
+  .productCard{
+    width:41%;
+    margin: 2%;
+  }
+}
+
+@media screen and (max-width:560px){
+  .productPrice{
+    display:block;
+  }
+  .productSale{
+    display:block;
+  }
+  .productOos{
+    display:block;
+  }
+}
+
+@media screen and (min-width:1080px){
+  .productCard{
+    width:21%;
+    margin: 1%;
+  }
 }
