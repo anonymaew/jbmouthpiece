@@ -1,4 +1,5 @@
 import React,{useState} from 'react'
+import {Route,BrowserRouter as Router,Link,Switch} from 'react-router-dom'
 import './App.css';
 
 import Navbar from './Navbar'
@@ -7,6 +8,7 @@ import Catalog from './Catalog'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
+import 'firebase/storage'
 
 firebase.initializeApp({
     apiKey: "AIzaSyAMpPm5d6SLjOGuNYuVH-0n7ols9xi89-s",
@@ -20,6 +22,7 @@ firebase.initializeApp({
 
 var dtb=firebase.firestore()
 var auth=firebase.auth()
+var str=firebase.storage();
 
 function App() {
 
@@ -31,10 +34,12 @@ function App() {
   })
 
   return (
-    <>
+    <Router>
       <Navbar auth={auth} user={user}/>
-      <Catalog dtb={dtb} user={user}/>
-    </>  
+        <Route path="/products">
+          <Catalog dtb={dtb} user={user} str={str}/>
+        </Route>
+    </Router>  
   );
 }
 
