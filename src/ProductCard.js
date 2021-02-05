@@ -6,7 +6,7 @@ import Tag from './Tag'
 export default function ProductCard({data,user,str,tgl,del}) {
 
   const [img,setimg]=useState(()=>{
-    str.ref().child("catalog/"+data.id+"/00_240x240.jpg").getDownloadURL().then((url)=>{setimg(url)})
+    str.ref().child("catalog/"+data.id+"/00_360x360.jpg").getDownloadURL().then((url)=>{setimg(url)})
     .catch(e=>setimg("https://firebasestorage.googleapis.com/v0/b/jbmouthpiece.appspot.com/o/catalog%2Fblank_240x240.jpg?alt=media&token=fa078eba-97ef-425f-8f41-c1801a79b662"))
   })
     return (

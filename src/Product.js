@@ -37,7 +37,7 @@ export default function Product({dtb,user,str,id}) {
     if(data==null || img==null) return;
     if(img.length==0 && data.img!=0){
         for(let i=0;i<data.img;i++)
-        str.ref().child("catalog/"+id+"/"+((i<10)?"0":"")+i+"_240x240.jpg").getDownloadURL().then((url)=>{setimg(ol=>[...ol,url])})
+        str.ref().child("catalog/"+id+"/"+((i<10)?"0":"")+i+"_360x360.jpg").getDownloadURL().then((url)=>{setimg(ol=>[...ol,url])})
         .catch(e=>alert(e.message))
     }
   },[data])
@@ -80,7 +80,7 @@ export default function Product({dtb,user,str,id}) {
 
   function delimg(){
     if(data.img==0) return;
-    str.ref().child('catalog/'+id+'/'+((data.img-1<10)?"0":"")+(+data.img-1)+"_240x240.jpg").delete().then(sn=>{
+    str.ref().child('catalog/'+id+'/'+((data.img-1<10)?"0":"")+(+data.img-1)+"_360x360.jpg").delete().then(sn=>{
       dtb.collection("catalog").doc(id).update({img:-1+data.img}).then(rs=>{
         setdata(i=>{
           let j=i;
@@ -103,9 +103,9 @@ export default function Product({dtb,user,str,id}) {
 
 
     return (
-        (ld%2==0 && ld!=0) ?
-          <>
-          <br/>
+        (ld>=2) ?
+          <div style={{display:(ld>2 || data.img==0)?"block":"none"}}>
+          <div style={{height:"48px"}}></div>
             <div>
               <a href="/products" className="close">กลับสู่หน้าสินค้า</a>
             </div>
@@ -113,12 +113,14 @@ export default function Product({dtb,user,str,id}) {
             <div className="product">
               <div className="productImg">
                 {(data.img==0) ? <img src="https://firebasestorage.googleapis.com/v0/b/jbmouthpiece.appspot.com/o/catalog%2Fblank_240x240.jpg?alt=media&token=fa078eba-97ef-425f-8f41-c1801a79b662"></img> :
-                (img!=null) ? img.map(i=><img src={i} style={{display:(i==img[pi])?"block":"none"}}></img>) : <></>}
+                (img!=null) ? img.map(i=><img src={i} style={{display:(i==img[pi])?"":"none"}} onLoad={()=>setld(i=>i+1)}></img>) : <></>}
                 <a className="imgPrev" onClick={()=>{if(img.length==1) return; setpi(i=>(i+img.length-1)%img.length)}}>&#10094;</a>
                 <a className="imgNext" onClick={()=>{if(img.length==1) return; setpi(i=>(i+1)%img.length)}}>&#10095;</a>
+                <div className="dotList">
                 {
                   img.map(i=>{return <span className="dot" style={{backgroundColor:(i==img[pi])?"#cfb991":"#ccc"}}></span>})
                 }
+                </div>
               </div>
               <div className="productDetail">
                 <Link to={"/products/"+id}>
@@ -159,11 +161,12 @@ export default function Product({dtb,user,str,id}) {
                         <input type="submit" value="save"></input>
                       </form>
                     </>
-                    : <></>
+                    : <a href="https://www.facebook.com/jbhuri/" target="_blank"><button className="btn2" id="contactBtn">ติดต่อผู้ขาย</button></a>
                 }
               </div>
-              {(user==="") ? <a href="https://www.facebook.com/jbhuri/" target="_blank"><button className="btn2" id="contactBtn">ติดต่อผู้ขาย</button></a> : <></>}
+              
             </div>
+            <br/>
             <div id="productDescription">
               <h3>คำอธิบาย:</h3>
               <p id="productText">{dct}</p>
@@ -175,6 +178,6 @@ export default function Product({dtb,user,str,id}) {
                 </form> : <></>
               }
             </div>
-          </>: <></>
+          </div>: <></>
       )
 }

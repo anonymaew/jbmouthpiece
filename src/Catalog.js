@@ -187,7 +187,8 @@ export default function Catalog({dtb,user,str}) {
                   </div>
                 )
               })}
-            </div><br></br>
+            </div>
+            <div style={{height:"48px"}}></div>
           <div>
             <a href="javascript:void(0)" className="close" onClick={()=>setssw(0)}>{'>>'} ตัวเลือก</a>
           </div>

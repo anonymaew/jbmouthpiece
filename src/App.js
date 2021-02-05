@@ -3,6 +3,7 @@ import {Route,BrowserRouter as Router,Link,Switch} from 'react-router-dom'
 import './App.css';
 
 import Navbar from './Navbar'
+import Home from './Home'
 import Catalog from './Catalog'
 
 import firebase from 'firebase/app'
@@ -36,9 +37,12 @@ function App() {
   return (
     <Router>
       <Navbar auth={auth} user={user}/>
-        <Route path="/products">
-          <Catalog dtb={dtb} user={user} str={str}/>
-        </Route>
+      <Route exact path="/">
+        <Home/>
+      </Route>
+      <Route path="/products">
+        <Catalog dtb={dtb} user={user} str={str}/>
+      </Route>
     </Router>  
   );
 }
