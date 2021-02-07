@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import {Route,BrowserRouter as Router,Link,Switch} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 import Tag from './Tag'
 
@@ -9,10 +9,12 @@ export default function ProductCard({data,user,str,tgl,del}) {
     str.ref().child("catalog/"+data.id+"/00_360x360.jpg").getDownloadURL().then((url)=>{setimg(url)})
     .catch(e=>setimg("https://firebasestorage.googleapis.com/v0/b/jbmouthpiece.appspot.com/o/catalog%2Fblank_240x240.jpg?alt=media&token=fa078eba-97ef-425f-8f41-c1801a79b662"))
   })
+  const[ld,setld]=useState(false);
+
     return (
-        <div className="productCard" key={data.id}>
+        <div className="productCard" key={data.id} style={{display:(ld)?"block":"none"}}>
             <Link to={"/products/"+data.id}>
-            <img src={img}></img>
+            <img src={img} onLoad={()=>setld(true)}></img>
             <p className="productName">{data.name}</p>
             </Link>
             <span className="productPrice" style={(data.sale==="" && !data.oos)?{}:{textDecoration:"line-through"}}>{data.price+" บาท"}</span>

@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import {Route,BrowserRouter as Router,Link,Switch,useParams} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 import Tag from './Tag'
 
@@ -12,12 +12,14 @@ export default function Product({dtb,user,str,id}) {
   const [img,setimg]=useState(()=>[])
   const [pi,setpi]=useState(0)
   const [dct,setdct]=useState("")
+  const [clip,setclip]=useState([])
 
   useEffect(()=>{
     dtb.collection("catalog").doc(id).get().then((data)=>{
       setdata(data.data())
       setld(i=>i+1)
       setdct(data.data().description)
+      setclip(data.data().clip)
     })
     .catch((e)=>{alert(e.message); setdata()})
 
@@ -53,7 +55,8 @@ export default function Product({dtb,user,str,id}) {
       oos:e.target.oos.checked,
       tag:lis,
       img:data.img,
-      description:dct
+      description:dct,
+      clip:clip
     }
     dtb.collection("catalog").doc(id).set(newOb)
     .then(()=>{
@@ -71,7 +74,7 @@ export default function Product({dtb,user,str,id}) {
           j.img=1+i.img;
           return j;
         })
-        alert("Image uploaded (refresh to see the result)")
+        if(window.confirm("Image uploaded (press OK to refresh and see the result)")) window.location.reload(true);
       })
       .catch(e=>alert(e.message))
     })
@@ -87,9 +90,27 @@ export default function Product({dtb,user,str,id}) {
           j.img=-1+i.img;
           return j;
         })
-        alert("Image deleted (refresh to see the result)")
+        if(window.confirm("Image deleted (press OK to refresh and see the result)")) window.location.reload(true);
       })
       .catch(e=>alert(e.message))
+    })
+    .catch(e=>alert(e.message))
+  }
+
+  function addclip(e){
+    let li=e.target.cliplink.value.replace("watch?v=","").split("/");
+    let ar=[...clip,li[li.length-1]];
+    dtb.collection("catalog").doc(id).update({clip:ar}).then(rs=>{
+      setclip(ar);
+    })
+    .catch(e=>alert(e.message))
+  }
+
+  function delclip(li){
+    let ar=[];
+    for(let i=0;i<clip.length;i++) if(clip[i]!=li) ar.push(clip[i]);
+    dtb.collection("catalog").doc(id).update({clip:ar}).then(rs=>{
+      setclip(ar);
     })
     .catch(e=>alert(e.message))
   }
@@ -101,13 +122,11 @@ export default function Product({dtb,user,str,id}) {
     .catch(e=>alert(e.message))
   }
 
-
     return (
         (ld>=2) ?
           <div style={{display:(ld>2 || data.img==0)?"block":"none"}}>
-          <div style={{height:"48px"}}></div>
-            <div>
-              <a href="/products" className="close">กลับสู่หน้าสินค้า</a>
+            <div style={{marginTop:"72px"}}>
+              <Link to="/products" className="option">กลับสู่หน้าสินค้า</Link>
             </div>
             <br/>
             <div className="product">
@@ -123,9 +142,7 @@ export default function Product({dtb,user,str,id}) {
                 </div>
               </div>
               <div className="productDetail">
-                <Link to={"/products/"+id}>
                 <p className="productName">{data.name}</p>
-                </Link>
                 <div className="productPriceContainer">
                   <p className="productPrice" style={(data.sale==="" && !data.oos)?{}:{textDecoration:"line-through"}}>{data.price+" บาท"}</p>
                   {(data.sale==="" || data.oos)?<></>:<p className="productSale">{data.sale+" บาท ("+((+data.sale-data.price)*100/+data.price).toFixed()+"%)"}</p>}
@@ -171,13 +188,28 @@ export default function Product({dtb,user,str,id}) {
               <h3>คำอธิบาย:</h3>
               <p id="productText">{dct}</p>
               {
+                clip.map(i=>{
+                  return <>
+                    <iframe src={"https://www.youtube.com/embed/"+i} frameBorder="0"></iframe>
+                    {(user!=="")?<button onClick={(e)=>{e.preventDefault(); delclip(i)}}>del</button>:<></>}
+                  </>
+                })
+              }
+              {
                 (user!=="") ?
-                <form onSubmit={(e)=>{e.preventDefault();editdct(e);}}>
-                  <textarea name="dctbox" id="" cols="80" rows="10" defaultValue={dct}></textarea>
-                  <input type="submit" value="save"></input>
-                </form> : <></>
+                <>
+                  <form onSubmit={(e)=>{e.preventDefault();editdct(e);}}>
+                    <textarea name="dctbox" id="" cols="80" rows="10" defaultValue={dct}></textarea>
+                    <input type="submit" value="save"></input>
+                  </form>
+                  <form onSubmit={(e)=>{e.preventDefault();addclip(e);}}>
+                    <input type="text" name="cliplink" placeholder="youtube link"></input><br/>
+                    <input type="submit" value="add"></input>
+                  </form>
+                </> : <></>
               }
             </div>
+            <div style={{height:"120px"}}></div>
           </div>: <></>
       )
 }

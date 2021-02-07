@@ -9,7 +9,7 @@ export default function Catalog({dtb,user,str}) {
     
     const [pdl,setpd]=useState([])
     const [tgl,settg]=useState([])
-    const [ssmt,setssmt]=useState(["az",[],false])
+    const [ssmt,setssmt]=useState([])
     const [ssw,setssw]=useState(-216)
   
     useEffect(()=>{
@@ -19,6 +19,7 @@ export default function Catalog({dtb,user,str}) {
           if(i.data().name!=="null") lis.push({id:i.id,...i.data(),visible:true})
         })
         setpd(()=>lis)
+        setssmt(["az",[],false])
       })
       .catch((e)=>{alert(e.message); setpd(()=>[])})
   
@@ -68,7 +69,8 @@ export default function Catalog({dtb,user,str}) {
         oos:false,
         tag:[],
         img:0,
-        description:"ไม่มีคำอธิบาย"
+        description:"ไม่มีคำอธิบาย",
+        clip:[]
       }
       dtb.collection("catalog").add(newOb).then((ref)=>{
         newOb.id=ref.id; newOb.visible=true;
@@ -81,7 +83,8 @@ export default function Catalog({dtb,user,str}) {
     function deleteCatalog(id){
       dtb.collection("catalog").doc(id).delete()
       .then(()=>{
-        str.ref().child('catalog/'+id).delete().then(sn=>{
+        //cannot delete the folder?
+        //str.ref().child('catalog/'+id).delete().then(sn=>{
           setpd((l)=>{
             let li=[...l],iin;
             for(let i=0;i<li.length;i++) if(li[i].id===id) iin=i;
@@ -89,8 +92,8 @@ export default function Catalog({dtb,user,str}) {
             return li
           })
           console.log("deleted");
-        })
-        .catch(e=>alert(e.message))
+        //})
+        //.catch(e=>alert(e.message))
       })
       .catch(e=>alert(e.message))
     }
@@ -111,7 +114,6 @@ export default function Catalog({dtb,user,str}) {
   
     function editTag(e,id){
       let newOb={
-        id:id,
         name:e.target.name.value,
         description:e.target.description.value,
         color:e.target.color.value
@@ -120,7 +122,7 @@ export default function Catalog({dtb,user,str}) {
       .then(()=>{
         settg((l)=>{
           let li=[...l]
-          for(let i=0;i<li.length;i++) if(li[i].id===e.target.id.value) li[i]=newOb
+          for(let i=0;i<li.length;i++) if(li[i].id===id) li[i]=newOb
           return li
         })
         console.log("updated");
@@ -144,9 +146,7 @@ export default function Catalog({dtb,user,str}) {
     return (
           <Switch>
             <Route exact path="/products">
-              {(window.location.href.split("/")[4]==null || window.location.href.split("/")[4]==="") ?
-              <>
-            <div id="sortsieve" style={{left:ssw+"px"}}>
+            <div id="sortsieve" className="menu" style={{left:ssw+"px"}}>
               <div>
                 <a href="javascript:void(0)" className="close" onClick={()=>setssw(-216)}>X</a>
               </div>
@@ -188,9 +188,8 @@ export default function Catalog({dtb,user,str}) {
                 )
               })}
             </div>
-            <div style={{height:"48px"}}></div>
-          <div>
-            <a href="javascript:void(0)" className="close" onClick={()=>setssw(0)}>{'>>'} ตัวเลือก</a>
+          <div style={{marginTop:"72px"}}>
+            <a href="javascript:void(0)" className="option" onClick={()=>setssw(0)}>{'>>'} ตัวเลือก</a>
           </div>
             <div id="catalog">
               {pdl.map(i=>{
@@ -234,8 +233,6 @@ export default function Catalog({dtb,user,str}) {
                     <button>add</button>
                   </form>
                 </> : <></>
-            }
-            </> : <></>
             }
             </Route>
         {pdl.map(i=>

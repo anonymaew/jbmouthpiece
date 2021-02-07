@@ -19,7 +19,6 @@ a{
 
 input,button,select{
   cursor: pointer;
-  border-radius: 8px;
   border-style: solid;
   border-color:#cfb991;
   background-color:#444
@@ -27,6 +26,59 @@ input,button,select{
 
 textarea{
   color:#000
+}
+
+.Navbar{
+  width:100%;
+  height:48px;
+  top:0;
+  background-color:#cfb991;
+}
+
+#navbarIcon{
+  display:block;
+  margin:6px auto 0 auto;
+}
+
+#hamburger{
+  position:absolute;
+  font-size:26px;
+  color:#000;
+  margin:4px 16px 4px 16px;
+  cursor: pointer;
+}
+
+#mainmenu{
+  z-index:2;
+  padding-left:0;
+  width:216px;
+  top:0;
+}
+
+.menuItem{
+  width: 200px;
+  height:40px;
+  padding:8px 0 0 32px;
+  cursor: pointer;
+  background-color:#222;
+  color:#fff;
+  transition:0.3s;
+}
+
+.menuItem:hover{
+  background-color:#cfb991;
+  color:#000;
+  transition: 0.3s;
+}
+
+.admin{
+  padding-left:32px;
+  position: absolute;
+  bottom:50px;
+}
+
+.admin input{
+  margin:4px;
 }
 
 .page{
@@ -287,6 +339,13 @@ textarea{
   margin:auto;
 }
 
+iframe{
+  display:block;
+  margin: 32px auto 32px auto;
+  width:600px;
+  height:338px;
+}
+
 #productText{
   white-space: pre-wrap;
 }
@@ -316,11 +375,10 @@ textarea{
   z-index: 1000;
 }
 
-#sortsieve{
+.menu{
   height: 100%;
   width: 200px;
   position: fixed;
-  z-index: 1;
   left: 0;
   background-color: #222;
   box-shadow: 0 4px 8px 0px rgba(0,0,0,0.75);
@@ -329,13 +387,22 @@ textarea{
   padding-left:16px;
 }
 
-.close{
-  margin-left:16px;
+#sortsieve{
+  z-index:1;
+  top:48px;
 }
 
-#sortsieve .close {
+.option{
+  margin:16px;
+}
+
+.close {
   font-size: 24px;
   margin-left: 160px;
+}
+
+#mainmenu .close{
+  margin-left:176px;
 }
 
 @media screen and (max-width:840px){
@@ -361,6 +428,11 @@ textarea{
 
   #productDescription{
     max-width:360px;
+  }
+
+  iframe{
+    width:360px;
+    height:203px;
   }
   .productCard{
     width:41%;

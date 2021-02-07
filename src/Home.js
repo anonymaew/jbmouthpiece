@@ -8,10 +8,10 @@ export default function Home({data}) {
             <img  className="bgimg" src="https://f.ptcdn.info/616/017/000/1396967277-Untitled1-o.jpg" alt=""/>
             <div className="page" style={{backgroundColor:"#000d",flexDirection:"column"}}>
                 <img className={(mil)?"loaded":"loading"} id="mainicon" src="https://firebasestorage.googleapis.com/v0/b/jbmouthpiece.appspot.com/o/img%2Fmain-icon.png?alt=media&token=c6a8b789-5d8c-4182-8139-501c9850ad37" alt="" onLoad={()=>setmil(true)}></img>
-                <p className={(mil)?"mloaded":"mloading"} style={{transitionDelay:"1.5s",margin:"30px auto",fontSize:"xx-large"}}>something special</p>
-                <div className={(mil)?"mloaded":"mloading"} style={{transitionDelay:"5s",margin:"30px auto"}}>
-                    <button className="btn2 bigbtn">เลือกดูสินค้า</button>
-                    <button className="btn1 bigbtn">ติดต่อผู้ขาย</button>
+                <p className={(mil)?"mloaded":"mloading"} style={{transitionDelay:"1.5s",margin:"30px auto",fontSize:"xx-large"}}>The sound you deserve</p>
+                <div className={(mil)?"mloaded":"mloading"} style={{transitionDelay:"3.5s",margin:"30px auto"}}>
+                    <a href="https://jbmouthpiece.web.app/products"><button className="btn2 bigbtn">เลือกดูสินค้า</button></a>
+                    <a href="https://www.facebook.com/jbhuri/"><button className="btn1 bigbtn">ติดต่อผู้ขาย</button></a>
                 </div>
             </div>
             <div id="feature" className="page flexr" style={{backgroundColor:"#222",top:"100%"}}>
