@@ -39,7 +39,10 @@ export default function Product({dtb,user,str,id}) {
     if(data==null || img==null) return;
     if(img.length==0 && data.img!=0){
         for(let i=0;i<data.img;i++)
-        str.ref().child("catalog/"+id+"/"+((i<10)?"0":"")+i+"_360x360.jpg").getDownloadURL().then((url)=>{setimg(ol=>[...ol,url])})
+        str.ref().child("catalog/"+id+"/"+((i<10)?"0":"")+i+"_360x360.jpg").getDownloadURL().then((url)=>{
+          document.head.insertAdjacentHTML("beforeend", "<style>[id='"+data.id+i.toString().padStart(2,'0')+"']{background-image:url("+url+")}</style>")
+          setimg(ol=>[...ol,url])
+        })
         .catch(e=>alert(e.message))
     }
   },[data])
@@ -123,21 +126,24 @@ export default function Product({dtb,user,str,id}) {
   }
 
     return (
-        (ld>=2) ?
-          <div style={{display:(ld>2 || data.img==0)?"block":"none"}}>
-            <div style={{marginTop:"72px"}}>
-              <Link to="/products" className="option">กลับสู่หน้าสินค้า</Link>
-            </div>
+      <>
+        <div style={{marginTop:"72px"}}>
+          <Link to="/products" className="option">กลับสู่หน้าสินค้า</Link>
+        </div>
+        {(ld>=2) ?
+          <div className={(ld>2 || data.img==0)?"loaded":"loading"}>
             <br/>
             <div className="product">
               <div className="productImg">
-                {(data.img==0) ? <img src="https://firebasestorage.googleapis.com/v0/b/jbmouthpiece.appspot.com/o/catalog%2Fblank_240x240.jpg?alt=media&token=fa078eba-97ef-425f-8f41-c1801a79b662"></img> :
-                (img!=null) ? img.map(i=><img src={i} style={{display:(i==img[pi])?"":"none"}} onLoad={()=>setld(i=>i+1)}></img>) : <></>}
+                <div className="productImgContainer" style={{width:"360px",height:"360px"}}>
+                  {(data.img==0) ? <img src="https://firebasestorage.googleapis.com/v0/b/jbmouthpiece.appspot.com/o/catalog%2Fblank_240x240.jpg?alt=media&token=fa078eba-97ef-425f-8f41-c1801a79b662"></img> :
+                  (img!=null) ? img.map((i,index)=><img id={data.id+index.toString().padStart(2,'0')} src="https://firebasestorage.googleapis.com/v0/b/jbmouthpiece.appspot.com/o/img%2Fwatermark.png?alt=media" style={{zIndex:(i==img[pi])?"0":"-1"}} onLoad={()=>setld(i=>i+1)}></img>) : <></>}
+                </div>
                 <a className="imgPrev" onClick={()=>{if(img.length==1) return; setpi(i=>(i+img.length-1)%img.length)}}>&#10094;</a>
                 <a className="imgNext" onClick={()=>{if(img.length==1) return; setpi(i=>(i+1)%img.length)}}>&#10095;</a>
                 <div className="dotList">
                 {
-                  img.map(i=>{return <span className="dot" style={{backgroundColor:(i==img[pi])?"#cfb991":"#ccc"}}></span>})
+                  img.map((i,index)=>{return <span className="dot" style={{backgroundColor:(i==img[pi])?"#cfb991":"#ccc"}} onClick={()=>{setpi(index)}}></span>})
                 }
                 </div>
               </div>
@@ -210,6 +216,8 @@ export default function Product({dtb,user,str,id}) {
               }
             </div>
             <div style={{height:"120px"}}></div>
-          </div>: <></>
+          </div>: <h1 style={{marginTop:"120px",textAlign:"center",color:"#ddd"}}> . . Loading . . </h1>
+          }
+        </>
       )
 }

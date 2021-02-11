@@ -109,7 +109,6 @@ textarea{
   min-height:100%;
   left:50%;
   right:50%;
-  bottom:-24px;
   transform:translateX(-50%);
 }
 
@@ -163,7 +162,7 @@ textarea{
 
 .loaded{
   opacity:1;
-  transition:1s;
+  transition:0.5s;
 }
 
 .mloading{
@@ -259,7 +258,7 @@ textarea{
   flex-wrap: wrap;
 }
 
-.productCard img {
+.productCardImg{
   width: 100%;
   border-radius: 8px;
 }
@@ -269,10 +268,12 @@ textarea{
   flex-shrink: 0;
   background-color:#444;
   transition:0.3s;
-  border-radius: 8px;
+  border-radius: 16px;
   box-shadow: 0 4px 8px 0px rgba(0,0,0,0.75);
   margin: 2%;
   padding: 8px;
+  background-size: 100%;
+  background-repeat: no-repeat;
 }
 
 .productCard:hover{
@@ -302,6 +303,11 @@ textarea{
   width:100%;
   max-width:360px;
   position:relative;
+}
+
+.productImgContainer img{
+  position:absolute;
+  z-index:-1;
 }
 
 .imgPrev, .imgNext {
