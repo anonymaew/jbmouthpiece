@@ -26,8 +26,8 @@ export default function Home({data}) {
             <video autoPlay muted loop className="bgimg" src="https://firebasestorage.googleapis.com/v0/b/jbmouthpiece.appspot.com/o/img%2Fbg.mp4?alt=media" alt="" onCanPlay={()=>setmil(true)}/>
             <div className="page" style={{backgroundColor:"#000a",flexDirection:"column"}}>
                 <img className={(mil)?"loaded":"loading"} id="mainicon" style={{transitionDelay:"0.5s"}} src="https://firebasestorage.googleapis.com/v0/b/jbmouthpiece.appspot.com/o/img%2Fmain-icon.png?alt=media" alt=""></img>
-                <p id="slogan" className={(mil)?"mloaded":"mloading"} style={{transitionDelay:"2s",margin:"30px auto"}}>The sound you deserve</p>
-                <div className={(mil)?"mloaded":"mloading"} style={{transitionDelay:"3s",margin:"30px auto"}}>
+                <p id="slogan" className={(mil)?"mloaded":"mloading"} style={{transitionDelay:"1.5s",margin:"30px auto"}}>The sound you deserve</p>
+                <div className={(mil)?"mloaded":"mloading"} style={{transitionDelay:"2.5s",margin:"30px auto"}}>
                     <a href="https://jbmouthpiece.web.app/products"><button className="btn2 bigbtn">เลือกดูสินค้า</button></a>
                     <a href="https://www.facebook.com/jbhuri/"><button className="btn1 bigbtn">ติดต่อผู้ขาย</button></a>
                 </div>
@@ -43,30 +43,30 @@ export default function Home({data}) {
                 </div>
             </div>
             <div id="feature" className="page flexr" style={{backgroundColor:"#222",top:"200%"}}>
-                <div className={"featureCard flexc "+((fload)?"mloaded":"mloading")}>
+                <div className={"card featureCard flexc "+((fload)?"mloaded":"mloading")}>
                     <div>
                         <img className="featureImg" src="https://firebasestorage.googleapis.com/v0/b/jbmouthpiece.appspot.com/o/img%2Fft1.jpg?alt=media" alt=""/>
                     </div>
                     <div>
-                        <p className="featureName">3D Printing</p>
+                        <p className="featureName shadowText">3D Printing</p>
                         <p className="featureDes">เราผลิตโดยใช้เทคโนโลยีปริ้น 3 มิติ ทำให้ mouthpiece มีความแม่นยำสูง และปรับแต่งได้ตามใจชอบ</p>
                     </div>
                 </div>
-                <div className={"featureCard flexc "+((fload)?"mloaded":"mloading")}>
+                <div className={"card featureCard flexc "+((fload)?"mloaded":"mloading")}>
                     <div>
                         <img className="featureImg" src="https://firebasestorage.googleapis.com/v0/b/jbmouthpiece.appspot.com/o/img%2Fft2.jpg?alt=media" alt=""/>
                     </div>
                     <div>
-                        <p className="featureName">Right fit</p>
+                        <p className="featureName shadowText">Right fit</p>
                         <p className="featureDes">เรามี mouthpiece ที่ครอบคลุมหลากหลาย เหมาะสมกับทุกระดับ ตั้งแต่เริ่มต้นเล่นจนไปถึงชำนาญ</p>
                     </div>
                 </div>
-                <div className={"featureCard flexc "+((fload)?"mloaded":"mloading")}>
+                <div className={"card featureCard flexc "+((fload)?"mloaded":"mloading")}>
                     <div>
                         <img className="featureImg" src="https://firebasestorage.googleapis.com/v0/b/jbmouthpiece.appspot.com/o/img%2Fft3.jpg?alt=media" alt=""/>
                     </div>
                     <div>
-                        <p className="featureName">Researching</p>
+                        <p className="featureName shadowText">Researching</p>
                         <p className="featureDes">เราไม่หยุดที่จะวิจัยพัฒนา mouthpiece เพื่อคุณภาพเสียงที่ดีที่สุด และตอบโจทย์ทุกสไตล์การเล่น</p>
                     </div>
                 </div>

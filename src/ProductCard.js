@@ -15,10 +15,10 @@ export default function ProductCard({data,user,str,tgl,del}) {
   const[ld,setld]=useState(false);
 
     return (
-        <div id={data.id} className="productCard" key={data.id} style={{display:(ld)?"block":"none"}} onLoad={()=>{setld(true)}}>
+        <div id={data.id} className="card productCard" key={data.id} style={{display:(ld)?"block":"none"}} onLoad={()=>{setld(true)}}>
             <Link to={"/products/"+data.id}>
             <img className="productCardImg" src="https://firebasestorage.googleapis.com/v0/b/jbmouthpiece.appspot.com/o/img%2Fwatermark.png?alt=media"></img>
-            <p className="productName">{data.name}</p>
+            <p className="productName shadowText">{data.name}</p>
             </Link>
             <span className="productPrice" style={(data.sale==="" && !data.oos)?{}:{textDecoration:"line-through"}}>{data.price+" บาท"}</span>
             {(data.sale==="" || data.oos)?<></>:<span className="productSale">{data.sale+" บาท ("+((+data.sale-data.price)*100/+data.price).toFixed()+"%)"}</span>}

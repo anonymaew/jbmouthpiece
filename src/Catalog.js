@@ -69,8 +69,7 @@ export default function Catalog({dtb,user,str}) {
         oos:false,
         tag:[],
         img:0,
-        description:"ไม่มีคำอธิบาย",
-        clip:[]
+        description:"ไม่มีคำอธิบาย"
       }
       dtb.collection("catalog").add(newOb).then((ref)=>{
         newOb.id=ref.id; newOb.visible=true;
@@ -146,7 +145,7 @@ export default function Catalog({dtb,user,str}) {
     return (
           <Switch>
             <Route exact path="/products">
-            <div id="sortsieve" className="menu" style={{left:ssw+"px"}}>
+            <div className="menu sortsieve" style={{left:ssw+"px"}}>
               <div>
                 <a href="javascript:void(0)" className="close" onClick={()=>setssw(-216)}>X</a>
               </div>
@@ -162,17 +161,17 @@ export default function Catalog({dtb,user,str}) {
                 <option value="Pp">ราคามากไปน้อย</option>
               </select><br></br><br></br>
               <p>ตัวกรอง</p>
-              <input onChange={(e)=>setssmt(i=>{
+              <span onClick={()=>setssmt(i=>{
                 let j=[...i]
-                j[2]=e.target.checked;
+                j[2]=!ssmt[2];
                 return j;
-              })} type="checkbox" name="seeoos"></input>
+              })} className={"checkbox "+((ssmt[2])?"check":"uncheck")}></span>
               <label htmlFor="seeoos">ไม่เลือกดูสินค้าที่หมดแล้ว</label>
               {tgl.map(i=>{
                 return(
                   <div key={i.id}>
-                    <input onChange={(e)=>{
-                      if(e.target.checked) setssmt((ossmt)=>{
+                    <span onClick={()=>{
+                      if(!ssmt[1].includes(i.id)) setssmt((ossmt)=>{
                         let j=[...ossmt]
                         j[1]=[...j[1],i.id]
                         return j;
@@ -182,7 +181,7 @@ export default function Catalog({dtb,user,str}) {
                         for(let nt of ossmt[1]) if(nt!==i.id) j.push(nt)
                         return [ossmt[0],j,ossmt[2]]
                       })
-                    }} type="checkbox" name={i.id}></input>
+                    }} className={"checkbox "+((ssmt[1].includes(i.id))?"check":"uncheck")}></span>
                     <Tag data={i}/>
                   </div>
                 )

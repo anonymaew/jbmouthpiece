@@ -5,6 +5,7 @@ import './App.css';
 import Navbar from './Navbar'
 import Home from './Home'
 import Catalog from './Catalog'
+import Board from './Board'
 
 import firebase from 'firebase/app'
 import 'firebase/firestore'
@@ -42,6 +43,9 @@ function App() {
       </Route>
       <Route path="/products">
         <Catalog dtb={dtb} user={user} str={str}/>
+      </Route>
+      <Route path="/posts">
+        <Board dtb={dtb} user={user}></Board>
       </Route>
     </Router>  
   );

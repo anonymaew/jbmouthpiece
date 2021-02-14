@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react'
 import {Link} from 'react-router-dom'
 
 import Tag from './Tag'
+import Post from './PostBox'
 
 export default function Product({dtb,user,str,id}) {
 
@@ -11,15 +12,11 @@ export default function Product({dtb,user,str,id}) {
 
   const [img,setimg]=useState(()=>[])
   const [pi,setpi]=useState(0)
-  const [dct,setdct]=useState("")
-  const [clip,setclip]=useState([])
 
   useEffect(()=>{
     dtb.collection("catalog").doc(id).get().then((data)=>{
       setdata(data.data())
       setld(i=>i+1)
-      setdct(data.data().description)
-      setclip(data.data().clip)
     })
     .catch((e)=>{alert(e.message); setdata()})
 
@@ -57,11 +54,9 @@ export default function Product({dtb,user,str,id}) {
       sale:e.target.sale.value,
       oos:e.target.oos.checked,
       tag:lis,
-      img:data.img,
-      description:dct,
-      clip:clip
+      img:data.img
     }
-    dtb.collection("catalog").doc(id).set(newOb)
+    dtb.collection("catalog").doc(id).update(newOb)
     .then(()=>{
       setdata(newOb)
       console.log("updated");
@@ -100,31 +95,6 @@ export default function Product({dtb,user,str,id}) {
     .catch(e=>alert(e.message))
   }
 
-  function addclip(e){
-    let li=e.target.cliplink.value.replace("watch?v=","").split("/");
-    let ar=[...clip,li[li.length-1]];
-    dtb.collection("catalog").doc(id).update({clip:ar}).then(rs=>{
-      setclip(ar);
-    })
-    .catch(e=>alert(e.message))
-  }
-
-  function delclip(li){
-    let ar=[];
-    for(let i=0;i<clip.length;i++) if(clip[i]!=li) ar.push(clip[i]);
-    dtb.collection("catalog").doc(id).update({clip:ar}).then(rs=>{
-      setclip(ar);
-    })
-    .catch(e=>alert(e.message))
-  }
-
-  function editdct(e){
-    dtb.collection("catalog").doc(id).update({description:e.target.dctbox.value}).then(rs=>{
-      setdct(e.target.dctbox.value)
-    })
-    .catch(e=>alert(e.message))
-  }
-
     return (
       <>
         <div style={{marginTop:"72px"}}>
@@ -133,7 +103,7 @@ export default function Product({dtb,user,str,id}) {
         {(ld>=2) ?
           <div className={(ld>2 || data.img==0)?"loaded":"loading"}>
             <br/>
-            <div className="product">
+            <div className="product shrink">
               <div className="productImg">
                 <div className="productImgContainer" style={{width:"360px",height:"360px"}}>
                   {(data.img==0) ? <img src="https://firebasestorage.googleapis.com/v0/b/jbmouthpiece.appspot.com/o/catalog%2Fblank_240x240.jpg?alt=media&token=fa078eba-97ef-425f-8f41-c1801a79b662"></img> :
@@ -148,7 +118,7 @@ export default function Product({dtb,user,str,id}) {
                 </div>
               </div>
               <div className="productDetail">
-                <p className="productName">{data.name}</p>
+                <p className="productName shadowText">{data.name}</p>
                 <div className="productPriceContainer">
                   <p className="productPrice" style={(data.sale==="" && !data.oos)?{}:{textDecoration:"line-through"}}>{data.price+" บาท"}</p>
                   {(data.sale==="" || data.oos)?<></>:<p className="productSale">{data.sale+" บาท ("+((+data.sale-data.price)*100/+data.price).toFixed()+"%)"}</p>}
@@ -190,31 +160,8 @@ export default function Product({dtb,user,str,id}) {
               
             </div>
             <br/>
-            <div id="productDescription">
-              <h3>คำอธิบาย:</h3>
-              <p id="productText">{dct}</p>
-              {
-                clip.map(i=>{
-                  return <>
-                    <iframe src={"https://www.youtube.com/embed/"+i} frameBorder="0"></iframe>
-                    {(user!=="")?<button onClick={(e)=>{e.preventDefault(); delclip(i)}}>del</button>:<></>}
-                  </>
-                })
-              }
-              {
-                (user!=="") ?
-                <>
-                  <form onSubmit={(e)=>{e.preventDefault();editdct(e);}}>
-                    <textarea name="dctbox" id="" cols="80" rows="10" defaultValue={dct}></textarea>
-                    <input type="submit" value="save"></input>
-                  </form>
-                  <form onSubmit={(e)=>{e.preventDefault();addclip(e);}}>
-                    <input type="text" name="cliplink" placeholder="youtube link"></input><br/>
-                    <input type="submit" value="add"></input>
-                  </form>
-                </> : <></>
-              }
-            </div>
+            <h3 className="shrink">คำอธิบาย:</h3><br/>
+            <Post dtb={dtb.collection("catalog").doc(id)} admin={user}/>
             <div style={{height:"120px"}}></div>
           </div>: <h1 style={{marginTop:"120px",textAlign:"center",color:"#ddd"}}> . . Loading . . </h1>
           }

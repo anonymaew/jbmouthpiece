@@ -24,6 +24,32 @@ input,button,select{
   background-color:#444
 }
 
+.checkbox{
+  display: inline-block;
+  cursor: pointer;
+  width:12px;
+  height:12px;
+  border-radius:50%;
+}
+
+.menu .checkbox{
+  margin-right:4px;;
+}
+
+.check{
+  transition: 0.3s;
+  background-color:rgb(167, 145, 105)
+}
+
+.uncheck{
+  transition: 0.3s;
+  background-color:#fff;
+}
+
+.shadowText{
+  text-shadow:2px 2px 4px #00000080
+}
+
 textarea{
   color:#000
 }
@@ -57,9 +83,11 @@ textarea{
 
 .menuItem{
   width: 200px;
-  height:40px;
-  padding:8px 0 0 32px;
+  height:50px;
+  padding:0 0 0 32px;
   cursor: pointer;
+  display:table-cell;
+  vertical-align: middle;
   background-color:#222;
   color:#fff;
   transition:0.3s;
@@ -67,6 +95,10 @@ textarea{
 
 .menuItem:hover{
   background-color:#cfb991;
+  transition: 0.3s;
+}
+
+.menuItem:hover *{
   color:#000;
   transition: 0.3s;
 }
@@ -181,15 +213,29 @@ textarea{
 #feature{
 }
 
-.featureCard{
-  position:relative;
-  width:27%;
+.shrink{
+  width:640px;
+  margin:auto;
+}
+
+.card{
   flex-shrink: 0;
   align-self: center;
   background-color:#444;
   transition:0.3s;
-  border-radius: 8px;
+  border-radius: 16px;
   box-shadow: 0 4px 8px 0px rgba(0,0,0,0.75);
+}
+
+.card:hover{
+  background-color:#333;
+  transition: 0.3s;
+}
+
+.featureCard{
+  position:relative;
+  width:27%;
+  align-self: center;
   margin: 2%;
 }
 
@@ -199,8 +245,8 @@ textarea{
 
 .featureImg{
   margin:4px;
-  border-radius: 4px;
-  width:98%;
+  border-radius: 16px;
+  width:96%;
 }
 
 .featureName{
@@ -265,20 +311,11 @@ textarea{
 
 .productCard{
   width:27%;
-  flex-shrink: 0;
-  background-color:#444;
-  transition:0.3s;
   border-radius: 16px;
-  box-shadow: 0 4px 8px 0px rgba(0,0,0,0.75);
   margin: 2%;
   padding: 8px;
   background-size: 100%;
   background-repeat: no-repeat;
-}
-
-.productCard:hover{
-  transition:0.3s;
-  background-color:#333;
 }
 
 .product{
@@ -290,7 +327,7 @@ textarea{
   max-width:660px;
   background-color:#444;
   transition:0.3s;
-  border-radius: 8px;
+  border-radius: 16px;
   box-shadow: 0 4px 8px 0px rgba(0,0,0,0.75);
   margin: auto;
   padding: 16px;
@@ -386,7 +423,7 @@ textarea{
 
 .productPrice{
   margin:8px;
-  color:#ddd;
+  color:#eee;
 }
 .productSale{
   margin:6px;
@@ -397,16 +434,39 @@ textarea{
   color:#ff8888;
 }
 
-#productDescription{
-  max-width:600px;
-  margin:auto;
+.postText{
 }
 
-iframe{
+.postText a{
+  text-decoration:underline;
+}
+
+.postText b{
+  color:#cfb991;
+}
+
+.postText img{
+  display:block;
+  max-width:100%;
+  margin:32px auto;
+}
+
+.postText iframe{
   display:block;
   margin: 32px auto 32px auto;
   width:600px;
   height:338px;
+}
+
+.postPage{
+  background-color:#333;
+  padding:32px;
+}
+
+.postBrief{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 #productText{
@@ -450,7 +510,7 @@ iframe{
   padding-left:16px;
 }
 
-#sortsieve{
+.sortsieve{
   z-index:1;
   top:48px;
 }
@@ -468,9 +528,24 @@ iframe{
   margin-left:176px;
 }
 
+.postCard{
+  width:90%;
+  margin: 5%;
+  padding: 16px;
+}
+
+.postDate{
+  font-size:x-small;
+  color:#bbb;
+}
+
 @media screen and (max-width:840px){
-  .product{
+  .shrink{
     max-width:360px;
+    margin:auto;
+  }
+
+  .product{
     justify-content:center;
   }
   .product .productName{
@@ -484,16 +559,22 @@ iframe{
     margin-bottom:32px;
   }
 
+  .postCard{
+    width:90%;
+    margin: 4%;
+    padding: 12px;
+  }
+
+  .postPage{
+    padding:16px;
+  }
+
   #contactBtn{
     width:92%;
     margin:0px;
   }
 
-  #productDescription{
-    max-width:360px;
-  }
-
-  iframe{
+  .postText iframe{
     width:360px;
     height:203px;
   }

@@ -31,16 +31,19 @@ export default function Navbar({auth,user}) {
               </div>
               <div style={{height:"64px"}}></div>
                 <Link to="/"><div className="menuItem">
-                    {"🏠 หน้าหลัก"}
+                    <p>{"🏠 หน้าหลัก"}</p>
                 </div></Link>
                 <Link to="/products"><div className="menuItem">
-                    {"🛍️ สินค้า"}
+                    <p>{"🛍️ สินค้า"}</p>
+                </div></Link>
+                <Link to="/posts"><div className="menuItem">
+                    <p>{"🪧 โพสต์ข้อความ"}</p>
                 </div></Link>
                 <a href="https://www.facebook.com/jbhuri/"><div className="menuItem">
-                    {"📱 ติดต่อผู้ขาย"}
+                    <p>{"📱 ติดต่อผู้ขาย"}</p>
                 </div></a>
                 <a href="javascript:void(0)"  onClick={()=>setamf(i=>!i)}><div className="menuItem">
-                    {"👨‍💻 สำหรับผู้ดูแลระบบ"}
+                    <p>{"👨‍💻 สำหรับผู้ดูแลระบบ"}</p>
                 </div></a>
                 <div className="admin" style={{display:(amf)?"block":"none"}}>
                     <form style={{display:(user==="")?"block":"none"}} onSubmit={logIn}>
