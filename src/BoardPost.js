@@ -11,7 +11,7 @@ export default function BoardPost({data,user,del}) {
             <p className="productName shadowText">{data.name}</p>
             </Link>
             <p className="postDate">&emsp;{"โพสต์เมื่อ "+data.time}</p>
-            <div className="postBrief">{data.description}</div>
+            <div className="postBrief" dangerouslySetInnerHTML={{__html:data.description}}></div>
             {
               (user!=="") ?
                   <button type="button" onClick={()=>del(data.id)}>del</button>

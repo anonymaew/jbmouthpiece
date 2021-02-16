@@ -37,7 +37,7 @@ export default function Navbar({auth,user}) {
                     <p>{"🛍️ สินค้า"}</p>
                 </div></Link>
                 <Link to="/posts"><div className="menuItem">
-                    <p>{"🪧 โพสต์ข้อความ"}</p>
+                    <p>{"📰 บอร์ดข้อความ"}</p>
                 </div></Link>
                 <a href="https://www.facebook.com/jbhuri/"><div className="menuItem">
                     <p>{"📱 ติดต่อผู้ขาย"}</p>

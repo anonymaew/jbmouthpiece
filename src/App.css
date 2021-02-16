@@ -70,7 +70,7 @@ textarea{
   position:absolute;
   font-size:26px;
   color:#000;
-  margin:4px 16px 4px 16px;
+  padding:4px 16px 4px 16px;
   cursor: pointer;
 }
 
@@ -89,6 +89,11 @@ textarea{
   display:table-cell;
   vertical-align: middle;
   background-color:#222;
+  color:#fff;
+  transition:0.3s;
+}
+
+.menuItem *{
   color:#fff;
   transition:0.3s;
 }
@@ -465,6 +470,8 @@ textarea{
 
 .postBrief{
   white-space: nowrap;
+  margin:12px;
+  height:24px;
   overflow: hidden;
   text-overflow: ellipsis;
 }

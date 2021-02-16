@@ -34,8 +34,9 @@ export default function PostPage({dtb,user,id}) {
     return (
       <>
         <div style={{marginTop:"72px"}}>
-          <Link to="/posts" className="option">กลับสู่หน้าฟีด</Link>
+          <Link to="/posts" className="option">กลับสู่หน้าบอร์ด</Link>
         </div>
+        <div style={{height:"24px"}}></div>
         {
             (ld>=1) ?
             <>

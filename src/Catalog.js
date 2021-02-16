@@ -233,6 +233,7 @@ export default function Catalog({dtb,user,str}) {
                   </form>
                 </> : <></>
             }
+            <div style={{height:"120px"}}></div>
             </Route>
         {pdl.map(i=>
           <Route path={"/products/"+i.id}>

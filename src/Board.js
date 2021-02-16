@@ -79,7 +79,7 @@ export default function Catalog({dtb,user}) {
               <div>
                 <a href="javascript:void(0)" className="close" onClick={()=>setssw(-216)}>X</a>
               </div>
-              <p>เรียงสินค้าจาก:</p>
+              <p>เรียงโพสต์จาก:</p>
               <select onChange={(e)=>setssmt(i=>{
                 let j=[...i]
                 j[0]=e.target.value;

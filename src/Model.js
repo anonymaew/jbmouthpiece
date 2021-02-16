@@ -7,14 +7,16 @@ export default function Model(scroll){
 
     function scrollmap(){
         let sc=[...scroll.scroll];
-        if(isNaN(sc[0])) return 0;
+        if(isNaN(sc[0]) || isNaN(sc[1])) return 0;
         if(sc[0]<sc[1]/pages*0.3) return 0;
         if(sc[0]>sc[1]/pages*1.5) return frameCount;
         return parseInt((sc[0]-sc[1]/pages*0.3)*frameCount/(sc[1]/pages*1.2));
     }
 
     function draw(ct){        
-        img.src = currentFrame(scrollmap());
+        let crf=scrollmap();
+        if(isNaN(crf)) crf=0;
+        img.src = currentFrame(crf);
         ct.drawImage(img, 0, 0);
     }
 
@@ -41,9 +43,9 @@ export default function Model(scroll){
 
 
     const frameCount = 60,pages=3;
-    const currentFrame = index => (
-        "https://firebasestorage.googleapis.com/v0/b/jbmouthpiece.appspot.com/o/img%2Fmodel%2F"+index.toString().padStart(2, '0')+".jpg?alt=media"
-    )
+    const currentFrame = index => {
+        return "https://firebasestorage.googleapis.com/v0/b/jbmouthpiece.appspot.com/o/img%2Fmodel%2F"+index.toString().padStart(2, '0')+".jpg?alt=media"
+    }
 
     const preloadImages = () => {
         for (let i = 0; i <= frameCount; i++) {
