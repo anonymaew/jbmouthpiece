@@ -1,4 +1,5 @@
 import React,{useState,useEffect} from 'react'
+import {Link} from 'react-router-dom'
 import Model from './Model'
 
 export default function Home({data}) {
@@ -44,31 +45,37 @@ export default function Home({data}) {
             </div>
             <div id="feature" className="page flexr" style={{backgroundColor:"#222",top:"200%"}}>
                 <div className={"card featureCard flexc "+((fload)?"mloaded":"mloading")}>
-                    <div>
-                        <img className="featureImg" src="https://firebasestorage.googleapis.com/v0/b/jbmouthpiece.appspot.com/o/img%2Fft1.jpg?alt=media" alt=""/>
-                    </div>
-                    <div>
-                        <p className="featureName shadowText">3D Printing</p>
-                        <p className="featureDes">เราผลิตโดยใช้เทคโนโลยีปริ้น 3 มิติ ทำให้ mouthpiece มีความแม่นยำสูง และปรับแต่งได้ตามใจชอบ</p>
-                    </div>
+                    <Link to="/posts/OoTUvmoJVaTW4Jgcaj8r">
+                        <div>
+                            <img className="featureImg" src="https://firebasestorage.googleapis.com/v0/b/jbmouthpiece.appspot.com/o/img%2Fft1.jpg?alt=media" alt=""/>
+                        </div>
+                        <div>
+                            <p className="featureName shadowText">3D Printing</p>
+                            <p className="featureDes">เราผลิตโดยใช้เทคโนโลยีปริ้น 3 มิติ ทำให้ mouthpiece มีความแม่นยำสูง และปรับแต่งได้ตามใจชอบ</p>
+                        </div>
+                    </Link>
                 </div>
                 <div className={"card featureCard flexc "+((fload)?"mloaded":"mloading")}>
-                    <div>
-                        <img className="featureImg" src="https://firebasestorage.googleapis.com/v0/b/jbmouthpiece.appspot.com/o/img%2Fft2.jpg?alt=media" alt=""/>
-                    </div>
-                    <div>
-                        <p className="featureName shadowText">Right fit</p>
-                        <p className="featureDes">เรามี mouthpiece ที่ครอบคลุมหลากหลาย เหมาะสมกับทุกระดับ ตั้งแต่เริ่มต้นเล่นจนไปถึงชำนาญ</p>
-                    </div>
+                    <Link to="/posts/eFIMfzjWgtYi7vsWeopw">
+                        <div>
+                            <img className="featureImg" src="https://firebasestorage.googleapis.com/v0/b/jbmouthpiece.appspot.com/o/img%2Fft2.jpg?alt=media" alt=""/>
+                        </div>
+                        <div>
+                            <p className="featureName shadowText">Right fit</p>
+                            <p className="featureDes">เรามี mouthpiece ที่ครอบคลุมหลากหลาย เหมาะสมกับทุกระดับ ตั้งแต่เริ่มต้นเล่นจนไปถึงชำนาญ</p>
+                        </div>
+                    </Link>
                 </div>
                 <div className={"card featureCard flexc "+((fload)?"mloaded":"mloading")}>
-                    <div>
-                        <img className="featureImg" src="https://firebasestorage.googleapis.com/v0/b/jbmouthpiece.appspot.com/o/img%2Fft3.jpg?alt=media" alt=""/>
-                    </div>
-                    <div>
-                        <p className="featureName shadowText">Researching</p>
-                        <p className="featureDes">เราไม่หยุดที่จะวิจัยพัฒนา mouthpiece เพื่อคุณภาพเสียงที่ดีที่สุด และตอบโจทย์ทุกสไตล์การเล่น</p>
-                    </div>
+                    <Link to="/posts/O23Em5r8uX1Va3s2dhKZ">
+                        <div>
+                            <img className="featureImg" src="https://firebasestorage.googleapis.com/v0/b/jbmouthpiece.appspot.com/o/img%2Fft3.jpg?alt=media" alt=""/>
+                        </div>
+                        <div>
+                            <p className="featureName shadowText">Researching</p>
+                            <p className="featureDes">เราไม่หยุดที่จะวิจัยพัฒนา mouthpiece เพื่อคุณภาพเสียงที่ดีที่สุด และตอบโจทย์ทุกสไตล์การเล่น</p>
+                        </div>
+                    </Link>
                 </div>
             </div>
         </>

@@ -55,6 +55,7 @@ export default function Catalog({dtb,user}) {
     }
   
     function deletePost(id){
+      if(!window.confirm("Are you sure you want to delete this post?")) return;
       dtb.collection("board").doc(id).delete()
       .then(()=>{
         //cannot delete the folder?

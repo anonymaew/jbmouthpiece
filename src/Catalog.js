@@ -30,6 +30,7 @@ export default function Catalog({dtb,user,str}) {
           if(i.data().name!=="null") lis.push({id:i.id,...i.data()})
         })
         settg(()=>lis)
+        sortTag()
       })
       .catch((e)=>{alert(e.message); settg(()=>[])})
     },[])
@@ -67,8 +68,10 @@ export default function Catalog({dtb,user,str}) {
         price:e.target.price.value,
         sale:e.target.sale.value,
         oos:false,
+        hide:false,
         tag:[],
         img:0,
+        shortdct:"ไม่มีคำอธิบาย",
         description:"ไม่มีคำอธิบาย"
       }
       dtb.collection("catalog").add(newOb).then((ref)=>{
@@ -78,8 +81,19 @@ export default function Catalog({dtb,user,str}) {
       })
       .catch((e)=>alert(e.message))
     }
+
+    function hideCatalog(id,hd){
+      dtb.collection("catalog").doc(id).update({hide:hd}).then(()=>{
+        setpd((l)=>{
+          let j=[...l];
+          for(let i=0;i<j.length;i++) if(j[i].id==id) j[i].hide=hd;
+          return j;
+        })
+      })
+    }
   
     function deleteCatalog(id){
+      if(!window.confirm("Are you sure you want to delete this product?")) return;
       dtb.collection("catalog").doc(id).delete()
       .then(()=>{
         //cannot delete the folder?
@@ -101,7 +115,8 @@ export default function Catalog({dtb,user,str}) {
       let newOb={
         name:e.target.name.value,
         description:e.target.description.value,
-        color:e.target.color.value
+        color:e.target.color.value,
+        number:(e.target.order.value=="")?"9":e.target.order.value==""
       }
       dtb.collection("tag").add(newOb).then((ref)=>{
         newOb.id=ref.id;
@@ -115,7 +130,8 @@ export default function Catalog({dtb,user,str}) {
       let newOb={
         name:e.target.name.value,
         description:e.target.description.value,
-        color:e.target.color.value
+        color:e.target.color.value,
+        number:e.target.order.value
       }
       dtb.collection("tag").doc(id).update(newOb)
       .then(()=>{
@@ -124,12 +140,22 @@ export default function Catalog({dtb,user,str}) {
           for(let i=0;i<li.length;i++) if(li[i].id===id) li[i]=newOb
           return li
         })
+        sortTag();
         console.log("updated");
       })
       .catch((e)=>alert(e.message))
     }
+
+    function sortTag(){
+      settg((l)=>{
+        let li=[...l];
+        li.sort((a,b)=>a.number-b.number)
+        return li;
+      })
+    }
   
     function deleteTag(id){
+      if(!window.confirm("Are you sure you want to delete this tag?")) return;
       dtb.collection("tag").doc(id).delete()
       .then(()=>{
         settg((l)=>{
@@ -141,7 +167,7 @@ export default function Catalog({dtb,user,str}) {
         console.log("deleted");
       })
     }
-  
+
     return (
           <Switch>
             <Route exact path="/products">
@@ -192,7 +218,7 @@ export default function Catalog({dtb,user,str}) {
           </div>
             <div id="catalog">
               {pdl.map(i=>{
-                if(i.visible) return <ProductCard key={i.id} user={user} str={str} data={i} tgl={tgl} del={deleteCatalog}/>
+                if(i.visible && (!i.hide || user!="")) return <ProductCard key={i.id} user={user} str={str} data={i} tgl={tgl} del={deleteCatalog} hide={hideCatalog}/>
               })}
             </div>
             <div id="tag">
@@ -202,9 +228,10 @@ export default function Catalog({dtb,user,str}) {
                   <div key={i.id}>
                     <Tag data={i}/>
                     <form onSubmit={(e)=>{e.preventDefault();editTag(e,i.id)}}>
-                      <input type="text" name="name" defaultValue={i.name}></input>
-                      <input type="text" name="description" defaultValue={i.description}></input>
-                      <input type="color" name="color" defaultValue={i.color}></input>
+                    <input type="text" name="name" placeholder="name" defaultValue={i.name}></input>
+                    <input type="text" name="description" placeholder="description" defaultValue={i.description}></input>
+                    <input type="number" name="order" placeholder="order (optional)" defaultValue={i.number}></input>
+                    <input type="color" name="color"></input>
                       <button>save</button>
                       <button type="button" onClick={()=>deleteTag(i.id)}>delete</button>
                     </form>
@@ -226,8 +253,9 @@ export default function Catalog({dtb,user,str}) {
                   </form><br/>
                   <form onSubmit={(e)=>{e.preventDefault();addTag(e);}}>
                     <p>เพิ่มแท็ก</p>
-                    <input type="text" name="name"></input>
-                    <input type="text" name="description"></input>
+                    <input type="text" name="name" placeholder="name"></input>
+                    <input type="text" name="description" placeholder="description"></input>
+                    <input type="number" name="order" placeholder="order (optional)"></input>
                     <input type="color" name="color"></input>
                     <button>add</button>
                   </form>

@@ -27,6 +27,7 @@ export default function Product({dtb,user,str,id}) {
         if(i.data().name!=="null") lis.push({id:i.id,...i.data()})
       })
       settg(()=>lis)
+      sortTag()
       setld(i=>i+1)
     })
     .catch((e)=>{alert(e.message); settg(()=>[])})
@@ -44,6 +45,15 @@ export default function Product({dtb,user,str,id}) {
     }
   },[data])
 
+  
+  function sortTag(){
+    settg((l)=>{
+      let li=[...l];
+      li.sort((a,b)=>a.number-b.number)
+      return li;
+    })
+  }
+
   function save(e){
     let lis=[]
     for(let ti of tgl) if(e.target[ti.id].checked) lis.push(ti.id)
@@ -52,7 +62,9 @@ export default function Product({dtb,user,str,id}) {
       name:e.target.name.value,
       price:e.target.price.value,
       sale:e.target.sale.value,
+      shortdct:e.target.shortdct.value,
       oos:e.target.oos.checked,
+      hide:data.hide,
       tag:lis,
       img:data.img
     }
@@ -124,11 +136,12 @@ export default function Product({dtb,user,str,id}) {
                   {(data.sale==="" || data.oos)?<></>:<p className="productSale">{data.sale+" บาท ("+((+data.sale-data.price)*100/+data.price).toFixed()+"%)"}</p>}
                   {(data.oos)?<p className="productOos">{(data.oos)?"สินค้าหมด":""}</p>:<></>}
                 </div>
+                <div className="productShortDescription">{data.shortdct}</div>
                 <br/>
                 <p style={{fontSize:"small"}}>ประเภท:</p>
-                {data.tag.map(ti=>{
-                  for(let li=0;li<tgl.length;li++) if(ti===tgl[li].id)
-                  return <Tag key={ti} data={tgl[li]}/>
+                {tgl.map(ti=>{
+                  for(let li=0;li<data.tag.length;li++) if(ti.id===data.tag[li])
+                  return <Tag key={ti.id} data={ti}/>
                 })}
                 <br/><br/>
                 {
@@ -140,6 +153,7 @@ export default function Product({dtb,user,str,id}) {
                         <input type="text" name="name" defaultValue={data.name}></input><br/>
                         <input type="number" name="price" defaultValue={data.price}></input><br/>
                         <input type="number" name="sale" defaultValue={data.sale}></input><br/>
+                        <input type="text" name="shortdct" defaultValue={data.shortdct}></input><br/>
                         <label htmlFor="oos">สินค้าหมด</label>
                         <input type="checkbox" name="oos" defaultChecked={data.oos}></input><br/>
                         {tgl.map(ti=>{

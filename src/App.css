@@ -438,6 +438,12 @@ textarea{
   margin:6px;
   color:#ff8888;
 }
+.productShortDescription{
+  margin:8px;
+  color:#ddd;
+  font-size: small;
+  text-align: right;
+}
 
 .postText{
 }
