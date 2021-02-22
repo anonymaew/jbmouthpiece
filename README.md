@@ -1,5 +1,5 @@
 # JBMouthpiece website
-This is a repo for [jbmouthpiece.com](https://jbmouthpiece.web.app) website.
+This is a repo for [jbmouthpiece.com](https://jbmouthpiece.com) website.
 
 ## Script
 First, clone this repo
