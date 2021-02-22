@@ -10,7 +10,7 @@ export default function Navbar({auth,user}) {
         e.preventDefault();
         auth.signInWithEmailAndPassword(e.target.user.value+"@napatsc.com",e.target.pass.value)
         .then((u)=>{
-            console.log("log in")
+            print("log in")
         })
         .catch((e)=>{alert(e.message)})
     }
@@ -18,9 +18,13 @@ export default function Navbar({auth,user}) {
     function logOut(){
         auth.signOut()
         .then(
-            console.log("log out")
+            print("log out")
         )
         .catch((e)=>{alert(e.message)})
+    }
+
+    function print(t){
+      if(user!=="") console.log(t)
     }
 
     return (
@@ -39,9 +43,9 @@ export default function Navbar({auth,user}) {
                 <Link to="/posts"><div className="menuItem">
                     <p>{"📰 บอร์ดข้อความ"}</p>
                 </div></Link>
-                <a href="https://www.facebook.com/jbhuri/"><div className="menuItem">
-                    <p>{"📱 ติดต่อผู้ขาย"}</p>
-                </div></a>
+                <Link to="/about"><div className="menuItem">
+                    <p>{"🔍 เกี่ยวกับเรา"}</p>
+                </div></Link>
                 <a href="javascript:void(0)"  onClick={()=>setamf(i=>!i)}><div className="menuItem">
                     <p>{"👨‍💻 สำหรับผู้ดูแลระบบ"}</p>
                 </div></a>

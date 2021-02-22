@@ -9,7 +9,7 @@ export default function Catalog({dtb,user,str}) {
     
     const [pdl,setpd]=useState([])
     const [tgl,settg]=useState([])
-    const [ssmt,setssmt]=useState([])
+    const [ssmt,setssmt]=useState([[],[],[]])
     const [ssw,setssw]=useState(-216)
   
     useEffect(()=>{
@@ -36,12 +36,12 @@ export default function Catalog({dtb,user,str}) {
     },[])
   
     useEffect(()=>{
-      console.log(pdl)
+      print(pdl)
     },[pdl])
 
     useEffect(()=>{
       let sort=ssmt[0],sieve=ssmt[1],seeoos=!ssmt[2];
-      console.log(ssmt)
+      print(ssmt)
       setpd((l)=>{
         let li=[]
         for(let i of l){
@@ -61,6 +61,28 @@ export default function Catalog({dtb,user,str}) {
         return li;
       })
     },[ssmt])
+
+    function print(t){
+      if(user!=="") console.log(t)
+    }
+
+    function selectType(t){
+      if(t==""){
+        setssmt(l=>{
+          let li=[];
+          for(let i of l[1]) if(i!="p5cynSZjdSXpv94NjL3Z" && i!="s0hbu7wo467k4ThB8Prr" && i!="VrhmZk40qxL2SqyEVfpJ") li.push(i);
+          return [l[0],li,l[2]]
+        })
+      }
+      else{
+        setssmt(l=>{
+          let li=[];
+          for(let i of l[1]) if(i!="p5cynSZjdSXpv94NjL3Z" && i!="s0hbu7wo467k4ThB8Prr" && i!="VrhmZk40qxL2SqyEVfpJ") li.push(i);
+          li.push(t);
+          return [l[0],li,l[2]]
+        })
+      }
+    }
   
     function addCatalog(e){
       let newOb={
@@ -77,7 +99,7 @@ export default function Catalog({dtb,user,str}) {
       dtb.collection("catalog").add(newOb).then((ref)=>{
         newOb.id=ref.id; newOb.visible=true;
         setpd((l)=>{return [...l,newOb]})
-        console.log("save at "+ref.id);
+        print("save at "+ref.id);
       })
       .catch((e)=>alert(e.message))
     }
@@ -104,7 +126,7 @@ export default function Catalog({dtb,user,str}) {
             li.splice(iin,1)
             return li
           })
-          console.log("deleted");
+          print("deleted");
         //})
         //.catch(e=>alert(e.message))
       })
@@ -121,7 +143,7 @@ export default function Catalog({dtb,user,str}) {
       dtb.collection("tag").add(newOb).then((ref)=>{
         newOb.id=ref.id;
         settg((l)=>{return [...l,newOb]})
-        console.log("save at "+ref.id);
+        print("save at "+ref.id);
       })
       .catch((e)=>alert(e.message))
     }
@@ -141,7 +163,7 @@ export default function Catalog({dtb,user,str}) {
           return li
         })
         sortTag();
-        console.log("updated");
+        print("updated");
       })
       .catch((e)=>alert(e.message))
     }
@@ -164,7 +186,7 @@ export default function Catalog({dtb,user,str}) {
           li.splice(iin,1)
           return li
         })
-        console.log("deleted");
+        print("deleted");
       })
     }
 
@@ -213,8 +235,14 @@ export default function Catalog({dtb,user,str}) {
                 )
               })}
             </div>
-          <div style={{marginTop:"72px",marginLeft:"24px"}}>
-            <a href="javascript:void(0)" onClick={()=>setssw(0)}><button className="btn1">{'>>'} ตัวเลือก</button></a>
+          <div style={{margin:"60px 0px 12px 0px"}}>
+            <button className={"typebtn "+((!ssmt[1].includes("p5cynSZjdSXpv94NjL3Z") && !ssmt[1].includes("s0hbu7wo467k4ThB8Prr") && !ssmt[1].includes("VrhmZk40qxL2SqyEVfpJ"))?"btn2":"btn1")} onClick={()=>{selectType("")}}>All</button>
+            <button className={"typebtn "+((ssmt[1].includes("p5cynSZjdSXpv94NjL3Z"))?"btn2":"btn1")} onClick={()=>{selectType("p5cynSZjdSXpv94NjL3Z")}}>Soprano</button>
+            <button className={"typebtn "+((ssmt[1].includes("s0hbu7wo467k4ThB8Prr"))?"btn2":"btn1")} onClick={()=>{selectType("s0hbu7wo467k4ThB8Prr")}}>Alto</button>
+            <button className={"typebtn "+((ssmt[1].includes("VrhmZk40qxL2SqyEVfpJ"))?"btn2":"btn1")} onClick={()=>{selectType("VrhmZk40qxL2SqyEVfpJ")}}>Tenor</button>
+          </div>
+          <div style={{margin:"0px 0px 36px 1%"}}>
+            <a href="javascript:void(0)" onClick={()=>setssw(0)}><button className="btn1">&emsp;ตัวเลือก&emsp;</button></a>
           </div>
             <div id="catalog">
               {pdl.map(i=>{

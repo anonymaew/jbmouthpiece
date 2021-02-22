@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react'
 import {Link} from 'react-router-dom'
 import Model from './Model'
 import ProductCard from './ProductCard'
+import About from './About'
 
 export default function Home({dtb,user,str}) {
     const [mil,setmil]=useState(false);
@@ -28,7 +29,7 @@ export default function Home({dtb,user,str}) {
           setssmt(["az",[],false])
             const interval = setInterval(() => {
                 setsl(i=>{
-                    console.log(i)
+                    print(i)
                     return (i+1)%(lis.length+1)})
             }, 4000);
             return () => clearInterval(interval);
@@ -60,11 +61,15 @@ export default function Home({dtb,user,str}) {
         }
       }, []);
 
+      function print(t){
+        if(user!=="") console.log(t)
+      }
+
     function sortTag(){
       settg((l)=>{
         let li=[...l];
         li.sort((a,b)=>a.number-b.number)
-        console.log(li)
+        print(li)
         return li;
       })
     }
@@ -154,65 +159,12 @@ export default function Home({dtb,user,str}) {
                     </div>
 
                 </div>
-                <div style={{height:"1px"}}>
-
+                <div  style={{margin:"32px auto"}}>
+                    <Link to="/products"><button className="btn2 bigbtn">ดูสินค้าเพิ่มเติม</button></Link>
                 </div>
             </div>
-            <div className="page" style={{backgroundColor:"#000a",top:"400%",padding:"0",display:"block"}}>
-                    <h1 className="shadowText" style={{textAlign:"center",marginTop:"40px"}}>เกี่ยวกับเรา</h1>
-                <div style={{maxWidth:"800px",display:"flex",flexWrap:"wrap",justifyContent:"center",margin:"auto"}}>
-                    <div className={"card aboutCard "+((fload)?"mloaded":"mloading")} style={{backgroundSize:"100%",backgroundImage:"url(https://firebasestorage.googleapis.com/v0/b/jbmouthpiece.appspot.com/o/img%2Fpp1.jpg?alt=media)"}}>
-                        <div style={{padding:"4px 16px 0 0"}}>
-                            <p className="aboutName shadowText">Bhuri Jearanaitanakij</p>
-                            <p className="aboutWork shadowText">Co-founder, Researcher</p>
-                            <p className="aboutWork shadowText">and Artist</p>
-                        </div>
-                        <div style={{width:"210px",marginTop:"16px",marginLeft:"140px",textAlign:"right"}}>
-                            <a href="https://www.facebook.com/jbhuri/"><span className="aboutContact">
-                                <img src="https://firebasestorage.googleapis.com/v0/b/jbmouthpiece.appspot.com/o/img%2Ffb.png?alt=media" alt=""/>
-                                <span>Bhuri Jearanaitanakij</span>
-                            </span></a>
-                            <a href="https://www.instagram.com/bhuri.jea/"><span className="aboutContact">
-                                <img src="https://firebasestorage.googleapis.com/v0/b/jbmouthpiece.appspot.com/o/img%2Fig.png?alt=media" alt=""/>
-                                <span>bhuri.jea</span>
-                            </span></a>
-                        </div>
-                    </div>
-                    <div className={"card aboutCard "+((fload)?"mloaded":"mloading")} style={{backgroundImage:"url(https://firebasestorage.googleapis.com/v0/b/jbmouthpiece.appspot.com/o/img%2Fpp2.jpg?alt=media)"}}>
-                        <div style={{padding:"16px 16px 0 0"}}>
-                            <p className="aboutName shadowText">Josh Espinosa</p>
-                            <p className="aboutWork shadowText">Co-founder and Artist</p>
-                        </div>
-                        <div style={{width:"210px",marginTop:"16px",marginLeft:"140px",textAlign:"right"}}>
-                            <a href="https://www.facebook.com/joshua.espinosa.98/"><span className="aboutContact">
-                                <img src="https://firebasestorage.googleapis.com/v0/b/jbmouthpiece.appspot.com/o/img%2Ffb.png?alt=media" alt=""/>
-                                <span>Josh Espinosa</span>
-                            </span></a>
-                            <a href="https://www.youtube.com/channel/UCXBVt8tSCN4Us1dLyjTkBbw"><span className="aboutContact">
-                                <img src="https://firebasestorage.googleapis.com/v0/b/jbmouthpiece.appspot.com/o/img%2Fyt.png?alt=media" alt=""/>
-                                <span>Josh Sax Espinosa</span>
-                            </span></a>
-                        </div>
-                    </div>
-                    <div className={"card aboutCard "+((fload)?"mloaded":"mloading")} style={{backgroundImage:"url(https://firebasestorage.googleapis.com/v0/b/jbmouthpiece.appspot.com/o/img%2Fpp3.jpg?alt=media)"}}>
-                        <div style={{padding:"16px 16px 0 0"}}>
-                            <p className="aboutName shadowText">Napat Srichan</p>
-                            <p className="aboutWork shadowText">Programmer and Web Designer</p>
-                        </div>
-                        <div style={{width:"210px",marginTop:"16px",marginLeft:"140px",textAlign:"right"}}>
-                            <a href="https://www.facebook.com/napatsc01/"><span className="aboutContact">
-                                <img src="https://firebasestorage.googleapis.com/v0/b/jbmouthpiece.appspot.com/o/img%2Ffb.png?alt=media" alt=""/>
-                                <span>Napat Srichan</span>
-                            </span></a>
-                            <a href="https://www.instagram.com/napatsc/"><span className="aboutContact">
-                                <img src="https://firebasestorage.googleapis.com/v0/b/jbmouthpiece.appspot.com/o/img%2Fig.png?alt=media" alt=""/>
-                                <span>napatsc</span>
-                            </span></a>
-                        </div>
-                    </div>
-
-                </div>
-
+            <div className="page" style={{backgroundColor:"#000a",top:"400%",display:"block"}}>
+                <About/>
             </div>
         </>
     )

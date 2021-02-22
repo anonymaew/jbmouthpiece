@@ -45,6 +45,10 @@ export default function Product({dtb,user,str,id}) {
     }
   },[data])
 
+  function print(t){
+    if(user!=="") console.log(t)
+  }
+
   
   function sortTag(){
     settg((l)=>{
@@ -71,7 +75,7 @@ export default function Product({dtb,user,str,id}) {
     dtb.collection("catalog").doc(id).update(newOb)
     .then(()=>{
       setdata(newOb)
-      console.log("updated");
+      print("updated");
     })
     .catch((e)=>alert(e.message))
   }

@@ -59,6 +59,7 @@ textarea{
   height:48px;
   top:0;
   background-color:#cfb991;
+  box-shadow: 0 0px 16px 0px rgba(0,0,0,0.75);
 }
 
 #navbarIcon{
@@ -367,6 +368,11 @@ textarea{
   transition:0.3s;
   background-color:rgba(0,0,0,0.25);
   color:#fff;
+}
+
+.typebtn{
+  width:22%;
+  margin:1%;
 }
 
 .bigbtn{

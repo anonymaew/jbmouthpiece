@@ -35,6 +35,10 @@ export default function Catalog({dtb,user}) {
         return li;
       })
     },[ssmt])
+    
+    function print(t){
+      if(user!=="") console.log(t)
+    }
   
     function addPost(e){
         let td=new Date().toString().split(" ");
@@ -50,7 +54,7 @@ export default function Catalog({dtb,user}) {
         newOb.id=ref.id;
         setps((l)=>{return [...l,newOb]})
         setssmt(i=>[...i])
-        console.log("save at "+ref.id);
+        print("save at "+ref.id);
       })
       .catch((e)=>alert(e.message))
     }
@@ -67,7 +71,7 @@ export default function Catalog({dtb,user}) {
             li.splice(iin,1)
             return li
           })
-          console.log("deleted");
+          print("deleted");
         //})
         //.catch(e=>alert(e.message))
       })

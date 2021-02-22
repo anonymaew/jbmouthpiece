@@ -6,6 +6,7 @@ import Navbar from './Navbar'
 import Home from './Home'
 import Catalog from './Catalog'
 import Board from './Board'
+import About from './About'
 
 import firebase from 'firebase/app'
 import 'firebase/firestore'
@@ -40,6 +41,9 @@ function App() {
       <Navbar auth={auth} user={user}/>
       <Route exact path="/">
         <Home dtb={dtb} user={user} str={str}/>
+      </Route>
+      <Route path="/about">
+        <About/>
       </Route>
       <Route path="/products">
         <Catalog dtb={dtb} user={user} str={str}/>

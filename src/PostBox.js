@@ -4,7 +4,6 @@ import Tag from './Tag'
 export default function PostBox({dtb,admin}) {
     const [dct,setdct]=useState(()=>{
         dtb.get().then((data=>{
-            console.log(admin)
             setdct(data.data().description)
         }))
         .catch(e=>alert(e.message))

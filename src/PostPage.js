@@ -10,7 +10,7 @@ export default function PostPage({dtb,user,id}) {
 
   useEffect(()=>{
     dtb.collection("board").doc(id).get().then((data)=>{
-        console.log(data.data())
+        print(data.data())
       setdata(data.data())
       setld(i=>i+1)
     })
@@ -27,9 +27,13 @@ export default function PostPage({dtb,user,id}) {
           timeEpoch:data.timeEpoch,
           description:data.description
         })
-      console.log("updated");
+      print("updated");
     })
     .catch((e)=>alert(e.message))
+  }
+  
+  function print(t){
+    if(user!=="") console.log(t)
   }
 
     return (
