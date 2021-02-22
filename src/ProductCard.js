@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 
 import Tag from './Tag'
 
-export default function ProductCard({data,user,str,tgl,del,hide}) {
+export default function ProductCard({data,user,str,tgl,del,hide,fw}) {
 
   const [img,setimg]=useState(()=>{
     str.ref().child("catalog/"+data.id+"/00_360x360.jpg").getDownloadURL().then((url)=>{
@@ -15,10 +15,10 @@ export default function ProductCard({data,user,str,tgl,del,hide}) {
   const[ld,setld]=useState(false);
 
     return (
-        <div id={data.id} className="card productCard" key={data.id} style={{display:(ld)?"block":"none"},{backgroundColor:(data.hide)?"#804000":""}} onLoad={()=>{setld(true)}}>
+        <div id={data.id} className={"card "+((fw<0)?"productCard":"productCardFix")} key={data.id} style={{display:(ld)?"block":"none"},{backgroundColor:(data.hide)?"#804000":"",width:((fw<0)?"":fw+"px")}}>
             <Link to={"/products/"+data.id}>
-            <img className="productCardImg" src="https://firebasestorage.googleapis.com/v0/b/jbmouthpiece.appspot.com/o/img%2Fwatermark.png?alt=media"></img>
-            <p className="productName shadowText">{data.name}</p>
+            <img className="productCardImg" src="https://firebasestorage.googleapis.com/v0/b/jbmouthpiece.appspot.com/o/img%2Fwatermark.png?alt=media" onLoad={()=>{setld(true)}}></img>
+            <p className="productName shadowText" style={{marginTop:((ld)?"":"103%")}}>{data.name}</p>
             </Link>
             <span className="productPrice" style={(data.sale==="" && !data.oos)?{}:{textDecoration:"line-through"}}>{data.price+" บาท"}</span>
             {(data.sale==="" || data.oos)?<></>:<span className="productSale">{data.sale+" บาท ("+((+data.sale-data.price)*100/+data.price).toFixed()+"%)"}</span>}
@@ -32,7 +32,7 @@ export default function ProductCard({data,user,str,tgl,del,hide}) {
             })}
             <br/>
             {
-              (user!=="") ?
+              (user!=="" && fw<0) ?
                 <>
                   <button type="button" onClick={()=>hide(data.id,!data.hide)}>{(data.hide)?"unhide":"hide"}</button>
                   <button type="button" onClick={()=>del(data.id)}>del</button>

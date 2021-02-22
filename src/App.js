@@ -39,7 +39,7 @@ function App() {
     <Router>
       <Navbar auth={auth} user={user}/>
       <Route exact path="/">
-        <Home/>
+        <Home dtb={dtb} user={user} str={str}/>
       </Route>
       <Route path="/products">
         <Catalog dtb={dtb} user={user} str={str}/>

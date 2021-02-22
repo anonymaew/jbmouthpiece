@@ -124,6 +124,27 @@ textarea{
   position:absolute;
   width:100%;
   height:100%;
+  overflow: hidden;
+}
+
+.productPage{
+  display:flex;
+  justify-content:center;
+  position:relative;
+  margin:0 auto;
+  height:540px;
+  transition:1s;
+  overflow:visible;
+}
+
+.whatsnew{
+  width:310px;
+  height:480px;
+  padding:16px;
+  margin:16px;
+  color:#000;
+  font-size:larger;
+  font-weight: bold;
 }
 
 .flexc{
@@ -141,7 +162,6 @@ textarea{
 
 .bgimg{
   position:fixed;
-  z-index:-1;
   min-width:100%;
   min-height:100%;
   left:50%;
@@ -220,7 +240,7 @@ textarea{
 
 .shrink{
   width:640px;
-  margin:auto;
+  margin:0 auto;
 }
 
 .card{
@@ -265,6 +285,57 @@ textarea{
 .featureDes{
   margin:16px;
   text-align:center;
+}
+
+.aboutCard{
+  flex-shrink:0;
+  width:360px;
+  height:180px;
+  margin:16px;
+  background-size:100%;
+}
+
+.aboutName{
+  text-align:right;
+  font-size:larger;
+  font-weight:bold;
+  color:rgb(227, 205, 165);
+}
+
+.aboutWork{
+  margin:8px;
+  margin:4px;
+  text-align:right;
+  color:#fff;
+  font-size:small;
+}
+
+.aboutContact{
+  display:inline-block;
+  padding:2px 8px;
+  margin:6px;
+  background-color:#fff;
+  transition:0.3s;
+  border-radius:16px;
+}
+
+.aboutContact:hover{
+  background-color:#cfb991;
+  transition:0.3s;
+}
+
+.aboutContact span{
+  font-size:small;
+  color:#000;
+}
+
+.aboutContact img{
+  display:inline-block;
+  position:relative;
+  width:16px;
+  height:16px;
+  bottom:-3px;
+  left:-3px;
 }
 
 .btn1{
@@ -318,6 +389,14 @@ textarea{
   width:27%;
   border-radius: 16px;
   margin: 2%;
+  padding: 8px;
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+.productCardFix{
+  border-radius: 16px;
+  margin: 16px auto;
   padding: 8px;
   background-size: 100%;
   background-repeat: no-repeat;
@@ -446,6 +525,7 @@ textarea{
 }
 
 .postText{
+  line-height:1.7;
 }
 
 .postText a{
@@ -467,6 +547,13 @@ textarea{
   margin: 32px auto 32px auto;
   width:600px;
   height:338px;
+}
+
+.postName{
+  margin:12px;
+  font-size:larger;
+  font-weight: bold;
+  color:#cfb991;
 }
 
 .postPage{
@@ -530,6 +617,7 @@ textarea{
 
 .option{
   margin:16px;
+  font-size:larger;
 }
 
 .close {
@@ -543,8 +631,15 @@ textarea{
 
 .postCard{
   width:90%;
+  padding:16px;
   margin: 5%;
-  padding: 16px;
+  flex-direction:row;
+  background-size:auto 100%;
+  background-repeat:no-repeat;
+}
+
+.postCard img{
+  height:120px;
 }
 
 .postDate{
@@ -555,7 +650,7 @@ textarea{
 @media screen and (max-width:840px){
   .shrink{
     max-width:360px;
-    margin:auto;
+    margin:0 auto;
   }
 
   .product{

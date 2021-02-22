@@ -18,10 +18,11 @@ export default function PostPage({dtb,user,id}) {
   },[])
 
   function save(e){
-    dtb.collection("board").doc(id).update({name:e.target.name.value})
+    dtb.collection("board").doc(id).update({name:e.target.name.value,img:e.target.img.value})
     .then(()=>{
       setdata({
           name:e.target.name.value,
+          img:e.target.img.value,
           time:data.time,
           timeEpoch:data.timeEpoch,
           description:data.description
@@ -33,8 +34,8 @@ export default function PostPage({dtb,user,id}) {
 
     return (
       <>
-        <div style={{marginTop:"72px"}}>
-          <Link to="/posts" className="option">กลับสู่หน้าบอร์ด</Link>
+        <div style={{marginTop:"72px",marginLeft:"24px"}}>
+          <Link to="/posts"><button className="btn1">กลับสู่หน้าบอร์ด</button></Link>
         </div>
         <div style={{height:"24px"}}></div>
         {
@@ -50,6 +51,7 @@ export default function PostPage({dtb,user,id}) {
                     <>
                       <form onSubmit={(e)=>{e.preventDefault();save(e);}}>
                         <input type="text" name="name" defaultValue={data.name}></input><br/>
+                        <input type="text" name="img" defaultValue={data.img}></input><br/>
                         <input type="submit" value="save"></input>
                       </form>
                     </>

@@ -137,7 +137,7 @@ export default function Catalog({dtb,user,str}) {
       .then(()=>{
         settg((l)=>{
           let li=[...l]
-          for(let i=0;i<li.length;i++) if(li[i].id===id) li[i]=newOb
+          for(let i=0;i<li.length;i++) if(li[i].id===id) li[i]={...newOb,id:id}
           return li
         })
         sortTag();
@@ -213,12 +213,12 @@ export default function Catalog({dtb,user,str}) {
                 )
               })}
             </div>
-          <div style={{marginTop:"72px"}}>
-            <a href="javascript:void(0)" className="option" onClick={()=>setssw(0)}>{'>>'} ตัวเลือก</a>
+          <div style={{marginTop:"72px",marginLeft:"24px"}}>
+            <a href="javascript:void(0)" onClick={()=>setssw(0)}><button className="btn1">{'>>'} ตัวเลือก</button></a>
           </div>
             <div id="catalog">
               {pdl.map(i=>{
-                if(i.visible && (!i.hide || user!="")) return <ProductCard key={i.id} user={user} str={str} data={i} tgl={tgl} del={deleteCatalog} hide={hideCatalog}/>
+                if(i.visible && (!i.hide || user!="")) return <ProductCard key={i.id} user={user} str={str} data={i} tgl={tgl} del={deleteCatalog} hide={hideCatalog} fw={-1}/>
               })}
             </div>
             <div id="tag">
@@ -231,7 +231,7 @@ export default function Catalog({dtb,user,str}) {
                     <input type="text" name="name" placeholder="name" defaultValue={i.name}></input>
                     <input type="text" name="description" placeholder="description" defaultValue={i.description}></input>
                     <input type="number" name="order" placeholder="order (optional)" defaultValue={i.number}></input>
-                    <input type="color" name="color"></input>
+                    <input type="color" name="color" defaultValue={i.color}></input>
                       <button>save</button>
                       <button type="button" onClick={()=>deleteTag(i.id)}>delete</button>
                     </form>

@@ -1,4 +1,5 @@
 import React,{useState} from 'react'
+import Tag from './Tag'
 
 export default function PostBox({dtb,admin}) {
     const [dct,setdct]=useState(()=>{

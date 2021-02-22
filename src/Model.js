@@ -42,7 +42,7 @@ export default function Model(scroll){
     },[draw])
 
 
-    const frameCount = 60,pages=3;
+    const frameCount = 60,pages=5;
     const currentFrame = index => {
         return "https://firebasestorage.googleapis.com/v0/b/jbmouthpiece.appspot.com/o/img%2Fmodel%2F"+index.toString().padStart(2, '0')+".jpg?alt=media"
     }

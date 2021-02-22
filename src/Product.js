@@ -109,8 +109,8 @@ export default function Product({dtb,user,str,id}) {
 
     return (
       <>
-        <div style={{marginTop:"72px"}}>
-          <Link to="/products" className="option">กลับสู่หน้าสินค้า</Link>
+        <div style={{marginTop:"72px",marginLeft:"24px"}}>
+          <Link to="/products"><button className="btn1">กลับสู่หน้าสินค้า</button></Link>
         </div>
         {(ld>=2) ?
           <div className={(ld>2 || data.img==0)?"loaded":"loading"}>

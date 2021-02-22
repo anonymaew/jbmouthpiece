@@ -41,6 +41,7 @@ export default function Catalog({dtb,user}) {
         let tds=td[2]+" "+td[1]+" "+td[3]+" "+td[4]
         let newOb={
             name:e.target.name.value,
+            img:"",
             time:tds,
             timeEpoch:Date.now(),
             description:"ไม่มีคำอธิบาย"
@@ -90,8 +91,8 @@ export default function Catalog({dtb,user}) {
                 <option value="tT">โพสต์เก่าสุดก่อน</option>
               </select>
             </div>
-          <div style={{marginTop:"72px"}}>
-            <a href="javascript:void(0)" className="option" onClick={()=>setssw(0)}>{'>>'} ตัวเลือก</a>
+          <div style={{marginTop:"72px",marginLeft:"24px"}}>
+            <a href="javascript:void(0)" onClick={()=>setssw(0)}><button className="btn1">{'>>'} ตัวเลือก</button></a>
           </div>
             <div className="shrink">
               {psl.map(i=>{
