@@ -26,12 +26,13 @@ export default function PostBox({dtb,admin}) {
                     <textarea name="dctbox" id="" cols="80" rows="10" defaultValue={dct}></textarea>
                     <p>
                       กดช่องว่าง - {'&nbsp;'}<br/>
-                      ขึ้นบรรทัดใหม่ - {'<br/>'}<br/>
+                      ขึ้นบรรทัดใหม่ - {'<br>'}<br/>
                       กดแท็บ - {'&emsp;'}<br/>
                       เน้นข้อความ - {"<b>"}ข้อความ{"</b>"}<br/>
-                      โยงลิงค์ข้อความ - {'<a href="ลิงค์">'+"ข้อความ"+"<a>"}<br/>
+                      โยงลิงค์ข้อความ - {'<a href="ลิงค์">'+"ข้อความ"+"</a>"}<br/>
                       ใส่รูป - {'<img src="'+"ลิงค์รูป"+'"/>'}<br/>
-                      ใส่คลิปยูทูป - {'<iframe src="https://www.youtube.com/embed/'+"ไอดีคลิป"+'" frameBorder="0"/>'}
+                      ใส่คลิป - {'<video controls><source src="'+"ลิงค์คลิป"+'" type="video/mp4"></video>'}<br/>
+                      ใส่คลิปยูทูป - {'<iframe src="https://www.youtube.com/embed/'+"ไอดีคลิป"+'" frameBorder="0"></iframe>'}
                     </p>
                     <input type="submit" value="save"></input>
                   </form>

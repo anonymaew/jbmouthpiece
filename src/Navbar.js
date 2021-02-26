@@ -43,6 +43,9 @@ export default function Navbar({auth,user}) {
                 <Link to="/posts"><div className="menuItem">
                     <p>{"📰 บอร์ดข้อความ"}</p>
                 </div></Link>
+                <Link to="/service"><div className="menuItem">
+                    <p>{"🛠️ บริการอื่น ๆ"}</p>
+                </div></Link>
                 <Link to="/about"><div className="menuItem">
                     <p>{"🔍 เกี่ยวกับเรา"}</p>
                 </div></Link>

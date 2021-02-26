@@ -80,8 +80,9 @@ export default function Home({dtb,user,str}) {
 
     return (
         <>
-            <video autoPlay muted loop className="bgimg" src="https://firebasestorage.googleapis.com/v0/b/jbmouthpiece.appspot.com/o/img%2Fbg.mp4?alt=media" alt="" onCanPlay={()=>setmil(true)} style={{zIndex:((scroll[0]>scroll[1]/5*2)?-2:-1)}}/>
-            <img className="bgimg" src="https://scontent.fkkc2-1.fna.fbcdn.net/v/t1.15752-9/146778168_1806917486136419_8910607922575159946_n.jpg?_nc_cat=100&ccb=3&_nc_sid=ae9488&_nc_eui2=AeHRI34-oujgMARJCJPM3y_aWgjq3DiDTdpaCOrcOINN2lKLEwB1eLQTxanEXQjCiml9Z7UQNABRv4X3N_yB_-E0&_nc_ohc=hI0CwPkT6L0AX9S9f4n&_nc_ht=scontent.fkkc2-1.fna&oh=c1ad79779f7757f5528e91c678916d1d&oe=6056FF84" alt="" style={{display:((mil)?"":"none"),zIndex:((scroll[0]>scroll[1]/5*2)?-1:-2)}}/>
+            <span className="blackscreen"></span>
+            <video autoPlay muted loop className="bgimg" src="https://firebasestorage.googleapis.com/v0/b/jbmouthpiece.appspot.com/o/img%2Fbg.mp4?alt=media" alt="" onCanPlay={()=>setmil(true)} style={{zIndex:((scroll[0]>scroll[1]/5*2)?-3:-1)}}/>
+            <img className="bgimg" src="https://firebasestorage.googleapis.com/v0/b/jbmouthpiece.appspot.com/o/img%2Fbgimg1.jpg?alt=media" alt="" style={{display:((mil)?"":"none"),zIndex:((scroll[0]>scroll[1]/5*2)?-1:-3)}}/>
             <div className="page" style={{backgroundColor:"#000a",flexDirection:"column"}}>
                 <img className={(mil)?"loaded":"loading"} id="mainicon" style={{transitionDelay:"0.5s"}} src="https://firebasestorage.googleapis.com/v0/b/jbmouthpiece.appspot.com/o/img%2Fmain-icon.png?alt=media" alt=""></img>
                 <p id="slogan" className={(mil)?"mloaded":"mloading"} style={{transitionDelay:"1.5s",margin:"30px auto"}}>The sound you deserve</p>

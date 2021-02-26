@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import {Route,BrowserRouter as Router,Link,Switch} from 'react-router-dom'
 import './App.css';
 
@@ -7,6 +7,8 @@ import Home from './Home'
 import Catalog from './Catalog'
 import Board from './Board'
 import About from './About'
+import Service from './Service'
+import Blank from './Blank'
 
 import firebase from 'firebase/app'
 import 'firebase/firestore'
@@ -30,27 +32,58 @@ var str=firebase.storage();
 function App() {
 
   const [user,setUser]=useState("")
+  const [cf,setcf]=useState()
 
   auth.onAuthStateChanged((u)=>{
     if(u) setUser(u.uid)
     else setUser("")
   })
 
+  useEffect(()=>{
+    dtb.collection("server").get().then((data)=>{
+      let ob={}
+      data.forEach((i)=>{
+        ob={...ob,...i.data()};
+      })
+      setcf(ob)
+    })
+    .catch((e)=>{alert(e.message);})
+  },[])
+
+  useEffect(()=>{
+    console.log(cf)
+  },[cf])
+
   return (
     <Router>
       <Navbar auth={auth} user={user}/>
-      <Route exact path="/">
-        <Home dtb={dtb} user={user} str={str}/>
-      </Route>
-      <Route path="/about">
-        <About/>
-      </Route>
-      <Route path="/products">
-        <Catalog dtb={dtb} user={user} str={str}/>
-      </Route>
-      <Route path="/posts">
-        <Board dtb={dtb} user={user}></Board>
-      </Route>
+        { (cf) ?
+        (!cf.maintenance) ?
+        <Switch>
+          <Route exact path="/">
+            <Home dtb={dtb} user={user} str={str}/>
+          </Route>
+          <Route path="/about">
+            <About/>
+          </Route>
+          <Route path="/service">
+            <Service/>
+          </Route>
+          <Route path="/products">
+            <Catalog dtb={dtb} user={user} str={str}/>
+          </Route>
+          <Route path="/posts">
+            <Board dtb={dtb} user={user}></Board>
+          </Route>
+          <Route path="*">
+            <Blank mtn={false}/>
+          </Route>
+        </Switch> : <Switch>
+          <Route path="*">
+            <Blank mtn={true}/>
+          </Route>
+        </Switch> 
+        : <></>}
     </Router>  
   );
 }
